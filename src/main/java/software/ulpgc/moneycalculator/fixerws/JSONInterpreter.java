@@ -12,7 +12,7 @@ public interface JSONInterpreter {
     Map<String, String> getCurrencies(String json);
 
     interface APILoader {
-        String loadJson(String url, String key) throws IOException;
+        String loadJson(API api) throws IOException;
     }
     interface CurrencyLoader {
         List<CurrencyRecord> load();

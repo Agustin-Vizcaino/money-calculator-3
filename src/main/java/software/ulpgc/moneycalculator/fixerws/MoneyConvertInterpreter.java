@@ -16,22 +16,29 @@ import java.util.Map;
 import static java.util.Collections.emptyList;
 
 public class MoneyConvertInterpreter implements JSONInterpreter {
+    API api;
     String url = "";
     String json = "";
 
-    public MoneyConvertInterpreter(String url, String key) {
-        this.url = url;
+    public MoneyConvertInterpreter(API api) {
+        this.api = api;
+        this.url = api.getURLWithKey();
+        try {
+            this.json = al.loadJson(this.api);
+        } catch (Exception e) {
+            System.out.println("Error loading API: " + e.getMessage());
+        }
     }
 
     APILoader al = new APILoader() {
         @Override
-        public String loadJson(String inputURL, String key) throws IOException {
-            URL url = new URL(inputURL);
+        public String loadJson(API input_api) throws IOException {
+            URL url = new URL(input_api.getURLWithKey());
             try (InputStream is = url.openStream()) {
                 return new String(is.readAllBytes());
             }
         }
-    }
+    };
 
     CurrencyLoader cl = new CurrencyLoader() {
 
