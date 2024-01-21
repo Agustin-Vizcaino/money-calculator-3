@@ -8,6 +8,6 @@ import javax.swing.*;
 public class SwingMoneyDisplay extends JLabel implements MoneyDisplay {
     @Override
     public void show(Money money) {
-        this.setText(money.toString());
+        if (money.amount() >= 0) this.setText(money.toString()); else this.setText("Error (negative amount)");
     }
 }
