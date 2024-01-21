@@ -4,7 +4,6 @@ import software.ulpgc.moneycalculator.*;
 import software.ulpgc.moneycalculator.fixerws.JSONInterpreter;
 import software.ulpgc.moneycalculator.fixerws.MoneyConvertInterpreter;
 import software.ulpgc.moneycalculator.fixerws.MoneyConverterAPI;
-import software.ulpgc.moneycalculator.mocks.MockExchangeRateLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +21,7 @@ public class SwingMain extends JFrame {
         SwingMain main = new SwingMain();
         manager = new MoneyConvertInterpreter(new MoneyConverterAPI());
         List<CurrencyRecord> currencies = manager.getCurrencies();
-        Collections.sort(currencies, Comparator.comparing(CurrencyRecord::toString));
+        currencies.sort(Comparator.comparing(CurrencyRecord::toString));
         Command command = new ExchangeMoneyCommand(
                 main.moneyDialog().define(currencies),
                 main.currencyDialog().define(currencies),
@@ -45,7 +44,7 @@ public class SwingMain extends JFrame {
     }
 
     private Component toolbar() {
-        JButton button = new JButton("calculate");
+        JButton button = new JButton("Calculate");
         button.addActionListener(e -> commands.get("exchange money").execute());
         return button;
     }

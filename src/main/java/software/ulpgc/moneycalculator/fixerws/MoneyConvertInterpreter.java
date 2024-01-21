@@ -5,7 +5,6 @@ import com.google.gson.JsonParser;
 import software.ulpgc.moneycalculator.CurrencyRecord;
 import software.ulpgc.moneycalculator.ExchangeRate;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -14,7 +13,7 @@ import java.util.*;
 
 public class MoneyConvertInterpreter implements JSONInterpreter {
     API api;
-    String url = "";
+    String url;
     String json = "";
     private APILoader al;
     private CurrencyLoader cl;
@@ -36,13 +35,10 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
     }
 
     private void startAL() {
-        al = new APILoader() {
-            @Override
-            public String loadJson(API input_api) throws IOException {
-                URL url = new URL(input_api.getURLWithKey());
-                try (InputStream is = url.openStream()) {
-                    return new String(is.readAllBytes());
-                }
+        al = input_api -> {
+            URL url = new URL(input_api.getURLWithKey());
+            try (InputStream is = url.openStream()) {
+                return new String(is.readAllBytes());
             }
         };
     }
@@ -51,7 +47,7 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
         cl = new CurrencyLoader() {
 
             List<CurrencyRecord> returner;
-            Map<String,String> currenciesMap;
+            final Map<String,String> currenciesMap;
             {
                 currenciesMap = getCurrencies(json);
             }
@@ -91,7 +87,7 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
 
     private void startRL() {
         rl = new RateLoader() {
-            Map<String,Float> ratesMap = new HashMap<>();
+            final Map<String,Float> ratesMap;
             {
                 ratesMap = getRates(json);
                 getDate(json);
@@ -115,9 +111,7 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
                 String date = String.valueOf(JsonParser.parseString(json).getAsJsonObject().get("lastupdate"));
                 date = date.replace("T","").substring(1,19);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
-                LocalDateTime returnerDate = LocalDateTime.parse(date, formatter);
-                return returnerDate;
-                //JsonObject date = JsonParser.parseString(String.valueOf(jsonObject.asMap().get("lastupdate")))
+                return LocalDateTime.parse(date, formatter);
             }
         };
     }
