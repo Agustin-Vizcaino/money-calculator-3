@@ -44,6 +44,10 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     }
 
     private long toLong(String text) {
-        return Long.parseLong(text);
+        try {
+            return Long.parseLong(text);
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

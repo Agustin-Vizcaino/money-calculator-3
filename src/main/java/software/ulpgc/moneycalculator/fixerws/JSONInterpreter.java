@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+//This interface (I hope) promotes high cohesion, solid internal structure, and could in fact be implemented
+//As a module instead of a single class
 public interface JSONInterpreter {
-    //Map<String, Float> getRates(String json);
-    //Map<String, String> getCurrenciesMap(String json);
     List<CurrencyRecord> getCurrencies();
     ExchangeRate getExchangeRate(String first, String second);
     ExchangeRate getExchangeRate(CurrencyRecord first, CurrencyRecord second);
@@ -24,7 +24,5 @@ public interface JSONInterpreter {
 
     interface RateLoader {
         ExchangeRate getRate(String first, String second);
-        //List<ExchangeRate> load();
-        //List<ExchangeRate> toList(String json);
     }
 }
