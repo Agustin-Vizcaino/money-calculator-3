@@ -9,6 +9,9 @@ import software.ulpgc.moneycalculator.ExchangeRate;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static java.util.Collections.emptyList;
@@ -99,7 +102,7 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
             }
             @Override
             public ExchangeRate getRate(String first, String second) {
-                return new ExchangeRate(cl.getCurrency(first), cl.getCurrency(second), null, ratesMap.get(first) / ratesMap.get(second));
+                return new ExchangeRate(cl.getCurrency(first), cl.getCurrency(second), getDate(json), ratesMap.get(first) / ratesMap.get(second));
             }
 
             private Map<String, Float> getRates(String json) {
@@ -112,9 +115,12 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
                 return returnerMap;
             }
 
-            private Date getDate(String json) {
-                System.out.println(JsonParser.parseString(json).getAsJsonObject().get("lastupdate"));
-                return null;
+            private LocalDateTime getDate(String json) {
+                String date = String.valueOf(JsonParser.parseString(json).getAsJsonObject().get("lastupdate"));
+                date = date.replace("T","").substring(1,19);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm:ss");
+                LocalDateTime returnerDate = LocalDateTime.parse(date, formatter);
+                return returnerDate;
                 //JsonObject date = JsonParser.parseString(String.valueOf(jsonObject.asMap().get("lastupdate")))
             }
         };

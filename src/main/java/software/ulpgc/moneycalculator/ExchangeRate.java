@@ -1,6 +1,6 @@
 package software.ulpgc.moneycalculator;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public record ExchangeRate(CurrencyRecord from, CurrencyRecord to, LocalDate date, double rate) {
+public record ExchangeRate(CurrencyRecord from, CurrencyRecord to, LocalDateTime date, double rate) {
 }
