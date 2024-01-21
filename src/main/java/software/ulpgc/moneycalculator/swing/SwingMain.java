@@ -1,6 +1,9 @@
 package software.ulpgc.moneycalculator.swing;
 
 import software.ulpgc.moneycalculator.*;
+import software.ulpgc.moneycalculator.fixerws.JSONInterpreter;
+import software.ulpgc.moneycalculator.fixerws.MoneyConvertInterpreter;
+import software.ulpgc.moneycalculator.fixerws.MoneyConverterAPI;
 import software.ulpgc.moneycalculator.mocks.MockExchangeRateLoader;
 
 import javax.swing.*;
@@ -15,16 +18,18 @@ public class SwingMain extends JFrame {
     private MoneyDialog moneyDialog;
     private CurrencyDialog currencyDialog;
 
+    private static JSONInterpreter manager;
     public static void main(String[] args) {
-        /*SwingMain main = new SwingMain();
-        List<CurrencyRecord> currencies = new FixerCurrencyLoader().load();
+        SwingMain main = new SwingMain();
+        manager = new MoneyConvertInterpreter(new MoneyConverterAPI());
+        List<CurrencyRecord> currencies = manager.getCurrencies();
         Command command = new ExchangeMoneyCommand(
                 main.moneyDialog().define(currencies),
                 main.currencyDialog().define(currencies),
                 new MockExchangeRateLoader(),
                 main.moneyDisplay());
         main.add("exchange money", command);
-        main.setVisible(true);*/
+        main.setVisible(true);
     }
 
     public SwingMain() throws HeadlessException {
