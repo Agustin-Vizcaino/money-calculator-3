@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        CurrencyLoader currencyLoader = new FixerCurrencyLoader();
-        List<CurrencyRecord> currencies = currencyLoader.load();
-        for (CurrencyRecord currency : currencies) {
+        //CurrencyLoader currencyLoader = new FixerCurrencyLoader();
+        //List<CurrencyRecord> currencies = currencyLoader.load();
+        /*for (CurrencyRecord currency : currencies) {
             System.out.println(currency);
-        }
+        }*/
     }
 }
