@@ -1,21 +1,21 @@
 package software.ulpgc.moneycalculator.mocks;
 
-import software.ulpgc.moneycalculator.Currency;
 import software.ulpgc.moneycalculator.CurrencyDialog;
+import software.ulpgc.moneycalculator.CurrencyRecord;
 
 import java.util.List;
 
 public class MockCurrencyDialog implements CurrencyDialog {
-    private List<Currency> currencies;
+    private List<CurrencyRecord> currencies;
 
     @Override
-    public CurrencyDialog define(List<Currency> currencies) {
+    public CurrencyDialog define(List<CurrencyRecord> currencies) {
         this.currencies = currencies;
         return this;
     }
 
     @Override
-    public Currency get() {
+    public CurrencyRecord get() {
         return currencies.get(1);
     }
 }

@@ -18,7 +18,7 @@ public class SwingMain extends JFrame {
 
     public static void main(String[] args) {
         SwingMain main = new SwingMain();
-        List<Currency> currencies = new FixerCurrencyLoader().load();
+        List<CurrencyRecord> currencies = new FixerCurrencyLoader().load();
         Command command = new ExchangeMoneyCommand(
                 main.moneyDialog().define(currencies),
                 main.currencyDialog().define(currencies),

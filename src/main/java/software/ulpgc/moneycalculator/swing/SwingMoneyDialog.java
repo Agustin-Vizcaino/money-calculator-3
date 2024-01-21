@@ -1,7 +1,7 @@
 package software.ulpgc.moneycalculator.swing;
 
-import software.ulpgc.moneycalculator.Currency;
 import software.ulpgc.moneycalculator.CurrencyDialog;
+import software.ulpgc.moneycalculator.CurrencyRecord;
 import software.ulpgc.moneycalculator.Money;
 import software.ulpgc.moneycalculator.MoneyDialog;
 
@@ -18,13 +18,13 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
     }
 
     @Override
-    public MoneyDialog define(List<Currency> currencies) {
+    public MoneyDialog define(List<CurrencyRecord> currencies) {
         add(createAmountField());
         add(createCurrencyDialog(currencies));
         return this;
     }
 
-    private Component createCurrencyDialog(List<Currency> currencies) {
+    private Component createCurrencyDialog(List<CurrencyRecord> currencies) {
         SwingCurrencyDialog dialog = new SwingCurrencyDialog();
         dialog.define(currencies);
         this.currencyDialog = dialog;

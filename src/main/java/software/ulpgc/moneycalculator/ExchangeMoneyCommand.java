@@ -16,7 +16,7 @@ public class ExchangeMoneyCommand implements Command{
     @Override
     public void execute() {
         Money money = moneyDialog.get();
-        Currency currency = currencyDialog.get();
+        CurrencyRecord currency = currencyDialog.get();
 
         ExchangeRate exchangeRate = exchangeRateLoader.load(money.currency(), currency);
         Money result = new Money((long) (money.amount()*exchangeRate.rate()), currency);

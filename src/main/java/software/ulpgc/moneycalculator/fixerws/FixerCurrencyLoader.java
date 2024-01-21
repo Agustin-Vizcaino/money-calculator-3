@@ -3,7 +3,6 @@ package software.ulpgc.moneycalculator.fixerws;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import software.ulpgc.moneycalculator.Currency;
 import software.ulpgc.moneycalculator.CurrencyLoader;
 import software.ulpgc.moneycalculator.CurrencyRecord;
 
@@ -19,7 +18,7 @@ import static java.util.Collections.emptyList;
 
 public class FixerCurrencyLoader implements CurrencyLoader {
     @Override
-    public List<Currency> load() {
+    public List<CurrencyRecord> load() {
         try {
             return toList(loadJson());
         } catch (IOException e) {
@@ -29,10 +28,10 @@ public class FixerCurrencyLoader implements CurrencyLoader {
 
     private List<CurrencyRecord> toList(String json) {
         List<CurrencyRecord> list = new ArrayList<>();
-        Map<String, Float> currencies = new MoneyConvertInterpreter().parseJSON(json);
+        Map<String, String> currencies = new MoneyConvertInterpreter().getCurrencies(json);
         //Map<String, JsonElement> symbols = new Gson().fromJson(json, JsonObject.class).get("symbols").getAsJsonObject().asMap();
         for (String symbol : currencies.keySet())
-            list.add(new CurrencyRecord(symbol, currencies.get(symbol).getAsString()));
+            list.add(new CurrencyRecord(symbol, currencies.get(symbol)));
         return list;
     }
 

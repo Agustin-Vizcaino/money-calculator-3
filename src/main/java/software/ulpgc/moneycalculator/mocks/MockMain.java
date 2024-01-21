@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MockMain {
     public static void main(String[] args) {
-        List<Currency> currencies = new MockCurrencyLoader().load();
+        List<CurrencyRecord> currencies = new MockCurrencyLoader().load();
         MoneyDialog moneyDialog = new MockMoneyDialog().define(currencies);
         CurrencyDialog currencyDialog = new MockCurrencyDialog().define(currencies);
         MoneyDisplay moneyDisplay = new MockMoneyDisplay();
