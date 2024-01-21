@@ -12,6 +12,7 @@ public interface JSONInterpreter {
     //Map<String, String> getCurrenciesMap(String json);
     List<CurrencyRecord> getCurrencies();
     ExchangeRate getExchangeRate(String first, String second);
+    ExchangeRate getExchangeRate(CurrencyRecord first, CurrencyRecord second);
     interface APILoader {
         String loadJson(API api) throws IOException;
     }

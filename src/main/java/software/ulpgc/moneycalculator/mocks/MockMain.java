@@ -11,7 +11,7 @@ public class MockMain {
         CurrencyDialog currencyDialog = new MockCurrencyDialog().define(currencies);
         MoneyDisplay moneyDisplay = new MockMoneyDisplay();
         ExchangeRateLoader exchangeRateLoader = new MockExchangeRateLoader();
-        Command command = new ExchangeMoneyCommand(moneyDialog, currencyDialog, exchangeRateLoader, moneyDisplay);
+        Command command = new ExchangeMoneyCommand(moneyDialog, currencyDialog, null, moneyDisplay);
         command.execute();
     }
 }

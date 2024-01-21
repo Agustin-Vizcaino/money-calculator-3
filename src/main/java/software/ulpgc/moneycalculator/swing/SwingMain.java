@@ -8,9 +8,8 @@ import software.ulpgc.moneycalculator.mocks.MockExchangeRateLoader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class SwingMain extends JFrame {
     private final Map<String,Command> commands = new HashMap<>();
@@ -23,10 +22,11 @@ public class SwingMain extends JFrame {
         SwingMain main = new SwingMain();
         manager = new MoneyConvertInterpreter(new MoneyConverterAPI());
         List<CurrencyRecord> currencies = manager.getCurrencies();
+        Collections.sort(currencies, Comparator.comparing(CurrencyRecord::toString));
         Command command = new ExchangeMoneyCommand(
                 main.moneyDialog().define(currencies),
                 main.currencyDialog().define(currencies),
-                new MockExchangeRateLoader(),
+                manager,
                 main.moneyDisplay());
         main.add("exchange money", command);
         main.setVisible(true);

@@ -2,19 +2,15 @@ package software.ulpgc.moneycalculator.fixerws;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import software.ulpgc.moneycalculator.CurrencyLoader;
 import software.ulpgc.moneycalculator.CurrencyRecord;
 import software.ulpgc.moneycalculator.ExchangeRate;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import static java.util.Collections.emptyList;
 
 public class MoneyConvertInterpreter implements JSONInterpreter {
     API api;
@@ -135,4 +131,6 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
     public ExchangeRate getExchangeRate(String first, String second) {
         return rl.getRate(first, second);
     }
+    @Override
+    public ExchangeRate getExchangeRate(CurrencyRecord first, CurrencyRecord second) { return rl.getRate(first.code(), second.code()); }
 }
