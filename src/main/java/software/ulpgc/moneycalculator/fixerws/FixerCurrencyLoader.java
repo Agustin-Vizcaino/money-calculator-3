@@ -35,11 +35,5 @@ public class FixerCurrencyLoader implements CurrencyLoader {
         return list;
     }
 
-    private String loadJson() throws IOException {
-        //URL url = new URL("http://data.fixer.io/api/symbols?access_key=" + FixerAPI.key);
-        URL url = new URL("https://cdn.moneyconvert.net/api/latest.json");
-        try (InputStream is = url.openStream()) {
-            return new String(is.readAllBytes());
-        }
-    }
+
 }
