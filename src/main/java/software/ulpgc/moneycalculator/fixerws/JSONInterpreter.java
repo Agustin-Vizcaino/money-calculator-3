@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface JSONInterpreter {
-    Map<String, Float> getRates(String json);
-    Map<String, String> getCurrencies(String json);
-
+    //Map<String, Float> getRates(String json);
+    //Map<String, String> getCurrenciesMap(String json);
+    List<CurrencyRecord> getCurrencies();
+    ExchangeRate getExchangeRate(String first, String second);
     interface APILoader {
         String loadJson(API api) throws IOException;
     }

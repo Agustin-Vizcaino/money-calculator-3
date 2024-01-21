@@ -16,7 +16,7 @@ public class SwingMain extends JFrame {
     private CurrencyDialog currencyDialog;
 
     public static void main(String[] args) {
-        SwingMain main = new SwingMain();
+        /*SwingMain main = new SwingMain();
         List<CurrencyRecord> currencies = new FixerCurrencyLoader().load();
         Command command = new ExchangeMoneyCommand(
                 main.moneyDialog().define(currencies),
@@ -24,7 +24,7 @@ public class SwingMain extends JFrame {
                 new MockExchangeRateLoader(),
                 main.moneyDisplay());
         main.add("exchange money", command);
-        main.setVisible(true);
+        main.setVisible(true);*/
     }
 
     public SwingMain() throws HeadlessException {

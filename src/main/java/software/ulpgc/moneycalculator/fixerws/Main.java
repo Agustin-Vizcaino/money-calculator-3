@@ -7,10 +7,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        JSONInterpreter manager = new MoneyConvertInterpreter(new MoneyConverterAPI());
         //CurrencyLoader currencyLoader = new FixerCurrencyLoader();
-        //List<CurrencyRecord> currencies = currencyLoader.load();
-        /*for (CurrencyRecord currency : currencies) {
-            System.out.println(currency);
-        }*/
+        List<CurrencyRecord> currencies = manager.getCurrencies();
     }
 }
