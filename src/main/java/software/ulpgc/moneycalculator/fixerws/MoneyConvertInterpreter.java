@@ -98,7 +98,7 @@ public class MoneyConvertInterpreter implements JSONInterpreter {
             }
             @Override
             public ExchangeRate getRate(String first, String second) {
-                return new ExchangeRate(cl.getCurrency(first), cl.getCurrency(second), getDate(json), ratesMap.get(first) / ratesMap.get(second));
+                return new ExchangeRate(cl.getCurrency(first), cl.getCurrency(second), getDate(json), ratesMap.get(second) / ratesMap.get(first));
             }
 
             private Map<String, Float> getRates(String json) {
